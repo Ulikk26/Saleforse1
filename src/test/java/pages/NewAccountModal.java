@@ -15,13 +15,13 @@ public class NewAccountModal extends BasePage {
 
     @Step("Создание нового акаунта со следующими параметрами :Account Name{name}, Parent Account {parentAccount}," +
             "Account Number {number}, ")
-    public void createAccount(String name, String parentAccount, String number, String accountSite, String type, String industry, String revenue,
-                              String rating, String phone, String fax, String website, String symbol, String ownership,
-                              String employees, String sicCode, String street, String city, String state, String zip,
-                              String country, String shippingStreet, String shippingCity, String shippingState,
-                              String shippingZip, String shippingCountry, String customerPriority, String date,
-                              String location, String active, String sla, String slaSerialNumber, String opportunity,
-                              String description) {
+    public void createAccount(String name, String parentAccount, String number, String accountSite, String type,
+                              String industry, String revenue, String rating, String phone, String fax, String website,
+                              String symbol, String ownership,String employees, String sicCode, String street,
+                              String city, String state, String zip, String country, String shippingStreet,
+                              String shippingCity, String shippingState, String shippingZip, String shippingCountry,
+                              String customerPriority, String date, String location, String active, String sla,
+                              String slaSerialNumber, String opportunity,String description) {
         new Input(driver, "Account Name").write(name);
         new ComboBox(driver, "Parent Account").select(parentAccount);
         new Input(driver, "Account Number").write(number);
