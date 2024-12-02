@@ -1,6 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import tests.wrappers.ComboBox;
 import tests.wrappers.Input;
@@ -8,6 +9,8 @@ import tests.wrappers.Picklist;
 import tests.wrappers.Textarea;
 
 public class NewAccountModal extends BasePage {
+
+    private final By BUTTON_SAVE = By.xpath("//button[@name = 'SaveEdit']");
 
     public NewAccountModal(WebDriver driver) {
         super(driver);
@@ -57,5 +60,10 @@ public class NewAccountModal extends BasePage {
         new Input(driver, "SLA Serial Number").write(slaSerialNumber);
         new Picklist(driver, "Upsell Opportunity").select(opportunity);
         new Textarea(driver, "Description").write(description);
+    }
+
+    @Step("Нажатие на кнопку Save")
+    public void clickButtonSave() {
+        driver.findElement(BUTTON_SAVE).click();
     }
 }
