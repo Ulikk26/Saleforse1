@@ -20,6 +20,5 @@ public class AccountsTests extends BaseTest {
                 "123", "Yes", "Gold","123456789", "Yes",
                 "It's COOL");
         newAccountModal.clickButtonSave();
-
     }
 }
