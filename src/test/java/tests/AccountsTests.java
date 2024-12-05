@@ -1,24 +1,45 @@
 package tests;
 
+import DTO_models.Account;
 import jdk.jfr.Description;
 import org.testng.annotations.Test;
 
+import static DTO_models.AccountFactory.getAccount;
+
 public class AccountsTests extends BaseTest {
 
-    @Test
-    @Description("Проверка создания нового акаунта")
+    Account account = new Account("Zhdanova", "", "", "", "", "", "",
+            "", "", "", "", "", "", "");
+
+    @Test(testName = "Создание нового аккаунта", description = "Создание нового аккаунта")
+    @Description("Создание нового аккаунта")
     public void checkCreateAccount() {
-        loginPage.openLoginPage();
-        loginPage.login("tborodich@tms.sandbox", "Password001");
-        accountsPage.openAccountsPage();
-        accountsPage.clickButtonNew();
-        newAccountModal.createAccount("Julia1", "TMS", "12345", "https://www.goodmoon.com/",
-                "Other","Apparel", "70000", "Hot", "37529111111111", "125454",
-                "https://www.goodmoon.com/","OK", "Other", "Ivan", "123", "Chkalova",
-                "Minsk", "RB", "12345", "Belarus", "Esenina", "Minsk",
-                "RB", "456","Belarus", "High", "01.01.2025",
-                "123", "Yes", "Gold","123456789", "Yes",
-                "It's COOL");
-        newAccountModal.clickButtonSave();
+        Account getAccount;
+        loginPage.open()
+                .isPageOpened()
+                .login("tborodich@tms.sandbox", "Password001")
+                .open()
+                .isPageOpened()
+                .clickButton("New")
+                .createAccount(getAccount("www.cool", "Hot", "Prospect", "Agriculture", "Public","Julia4"))
+                .clickActionButton("Save")
+                .checkSuccessMassage();
+    }
+
+    @Test(testName = "Редактирование данных аккаунта", description = "Редактирование данных аккаунта")
+    @Description("Редактирование данных аккаунта")
+    public void changeAccountInput() {
+        Account getAccount;
+        loginPage.open()
+                .isPageOpened()
+                .login("tborodich@tms.sandbox", "Password001")
+                .open()
+                .isPageOpened()
+                .inputSearchField("Julia")
+                .clickActionButton("Edit", "Julia")
+                .editWindowIsDisplayed()
+                .editAccount(account, "Zhdanova", "Warm")
+                .clickActionButton("Save")
+                .checkSuccessMassage();
     }
 }

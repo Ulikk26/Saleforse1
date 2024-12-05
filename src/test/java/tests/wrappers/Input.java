@@ -16,4 +16,8 @@ public class Input {
         driver.findElement(By.xpath(String.format("//label[text()='%s']//ancestor::lightning-input//input", label)))
                 .sendKeys(text);
     }
+
+    public void clearInput(String label) {
+        driver.findElement(By.xpath(String.format("//label[text()='%s']//ancestor::lightning-input//input", label))).clear();
+    }
 }

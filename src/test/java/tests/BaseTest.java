@@ -26,6 +26,7 @@ public class BaseTest {
     public void setUp(@Optional("chrome") String browser) {
         if (browser.equalsIgnoreCase("chrome")) {
             ChromeOptions options = new ChromeOptions();
+            options.addArguments("--disable-notifications");
             options.addArguments("start-maximized");
             driver = new ChromeDriver(options);
         } else if (browser.equalsIgnoreCase("fireFox")) {
@@ -34,7 +35,6 @@ public class BaseTest {
             driver = new EdgeDriver();
         }
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-
         newAccountModal = new NewAccountModal(driver);
         loginPage = new LoginPage(driver);
         accountsPage = new AccountsPage(driver);
