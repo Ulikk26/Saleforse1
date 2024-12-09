@@ -1,5 +1,6 @@
-package tests.wrappers;
+package wrappers;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+@Log4j2
 public class ComboBox {
 
     WebDriver driver;
@@ -22,6 +24,7 @@ public class ComboBox {
     }
 
     public void select(String option) {
+        log.info("Selecting '{}' inside picklist",option,label);
         driver.findElement(By.xpath(String.format(lookupPattern + "//input", label)))
                 .click();
         driver.findElement(By.xpath(String.format(lookupPattern + "//input", label))).sendKeys(option);

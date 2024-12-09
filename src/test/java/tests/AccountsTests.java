@@ -1,19 +1,48 @@
 package tests;
 
 import DTO_models.Account;
+import com.github.javafaker.Faker;
 import jdk.jfr.Description;
+import lombok.extern.log4j.Log4j2;
 import org.testng.annotations.Test;
 
-import static DTO_models.AccountFactory.getAccount;
-
+@Log4j2
 public class AccountsTests extends BaseTest {
 
-    Account account = new Account("Zhdanova", "", "", "", "", "", "",
-            "", "", "", "", "", "", "");
+    Faker faker = new Faker();
+
+    Account account1 = Account.builder()
+            .accountName("julia55")
+            .accountNumber("12345")
+            .phone("33654")
+            .fax(faker.phoneNumber().cellPhone())
+            .accountSite("www.cool")
+            .rating("Hot")
+            .type("Prospect")
+            .industry("Agriculture")
+            .annualRevenue(faker.number().digit())
+            .website(faker.internet().url())
+            .tickerSymbol(faker.letterify("ABCD"))
+            .ownership("Public")
+            .employees(faker.number().digit())
+            .parentAccount("Julia4")
+            .build();
+
+    Account account2 = Account.builder()
+            .accountName("julia55")
+            .accountNumber("12345")
+            .phone("33654")
+            .build();
+
+    Account accountEdit = Account.builder()
+            .accountName("Julia875")
+            .rating("Warm")
+            .build();
 
     @Test(testName = "Создание нового аккаунта", description = "Создание нового аккаунта")
     @Description("Создание нового аккаунта")
     public void checkCreateAccount() {
+        log.info("Creating new account");
         Account getAccount;
         loginPage.open()
                 .isPageOpened()
@@ -21,9 +50,9 @@ public class AccountsTests extends BaseTest {
                 .open()
                 .isPageOpened()
                 .clickButton("New")
-                .createAccount(getAccount("www.cool", "Hot", "Prospect", "Agriculture", "Public","Julia4"))
+                .createAccount(account2)
                 .clickActionButton("Save")
-                .checkSuccessMassage();
+                .checkCreateSuccessMassage();
     }
 
     @Test(testName = "Редактирование данных аккаунта", description = "Редактирование данных аккаунта")
@@ -38,8 +67,8 @@ public class AccountsTests extends BaseTest {
                 .inputSearchField("Julia")
                 .clickActionButton("Edit", "Julia")
                 .editWindowIsDisplayed()
-                .editAccount(account, "Zhdanova", "Warm")
+                .editAccount(accountEdit)
                 .clickActionButton("Save")
-                .checkSuccessMassage();
+                .checkSaveSuccessMassage();
     }
 }
