@@ -6,9 +6,7 @@ import lombok.Builder;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.Assert;
 import wrappers.ComboBox;
 import wrappers.Input;
 import wrappers.Picklist;
@@ -18,6 +16,7 @@ public class EditModal extends BasePage {
 
     private final By EDIT_MODAL_WINDOW = By.xpath("//records-modal-lwc-detail-panel-wrapper");
     private final String BUTTON = "//button[text() = '%s']";
+    private final By SAVE_BUTTON = By.xpath("//button[text() = 'Save']");
 
     public EditModal(WebDriver driver) {
         super(driver);
@@ -25,21 +24,20 @@ public class EditModal extends BasePage {
 
     @Override
     public EditModal isPageOpened() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@title='Save']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(SAVE_BUTTON));
         return this;
     }
 
     @Override
     public BasePage open() {
-        return null;
+        return this;
     }
 
     @Step("Проверка отображения модального окна редактирования данных")
     public EditModal editWindowIsDisplayed() {
         log.info("EditModal is opened");
-        WebElement editWindow = wait.until(ExpectedConditions.elementToBeClickable(EDIT_MODAL_WINDOW));
-        Assert.assertTrue(editWindow.isDisplayed(), "модалка редактирования данных не отображается ");
-        return new EditModal(driver);
+        wait.until(ExpectedConditions.elementToBeClickable(EDIT_MODAL_WINDOW));
+        return this;
     }
 
     @Builder
@@ -101,7 +99,7 @@ public class EditModal extends BasePage {
     }
 
     @Step("Нажать на кнопку {buttonName} ")
-    public AccountsPage clickActionButton(String buttonName) {
+    public AccountsPage clickButton(String buttonName) {
         log.info("Clicking button {}", buttonName);
         By button = By.xpath(String.format(BUTTON, buttonName));
         driver.findElement(button).click();

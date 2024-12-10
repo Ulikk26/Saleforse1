@@ -82,6 +82,5 @@ public class AccountsPage extends BasePage {
     public WebElement checkSaveSuccessMassage() {
         log.info("Check success massage about editing account");
         return driver.findElement(EDIT_SUCCESS_MESSAGE);
-
     }
 }
