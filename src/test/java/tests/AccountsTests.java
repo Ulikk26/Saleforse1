@@ -12,7 +12,7 @@ public class AccountsTests extends BaseTest {
     Faker faker = new Faker();
 
     Account account1 = Account.builder()
-            .accountName("julia55")
+            .accountName("julia57")
             .accountNumber("12345")
             .phone("33654")
             .fax(faker.phoneNumber().cellPhone())
@@ -29,13 +29,13 @@ public class AccountsTests extends BaseTest {
             .build();
 
     Account account2 = Account.builder()
-            .accountName("julia55")
+            .accountName("julia77")
             .accountNumber("12345")
             .phone("33654")
             .build();
 
     Account accountEdit = Account.builder()
-            .accountName("Julia875")
+            .accountName("Julia811")
             .rating("Warm")
             .build();
 
@@ -43,32 +43,14 @@ public class AccountsTests extends BaseTest {
     @Description("Создание нового аккаунта")
     public void checkCreateAccount() {
         log.info("Creating new account");
-        Account getAccount;
-        loginPage.open()
-                .isPageOpened()
-                .login("tborodich@tms.sandbox", "Password001")
-                .open()
-                .isPageOpened()
-                .clickButton("New")
-                .createAccount(account2)
-                .clickActionButton("Save")
-                .checkCreateSuccessMassage();
+        loginStep.login("tborodich@tms.sandbox", "Password001");
+        accountStep.create(account2, "julia77");
     }
 
     @Test(testName = "Редактирование данных аккаунта", description = "Редактирование данных аккаунта")
     @Description("Редактирование данных аккаунта")
-    public void changeAccountInput() {
-        Account getAccount;
-        loginPage.open()
-                .isPageOpened()
-                .login("tborodich@tms.sandbox", "Password001")
-                .open()
-                .isPageOpened()
-                .inputSearchField("Julia")
-                .clickActionButton("Edit", "Julia")
-                .editWindowIsDisplayed()
-                .editAccount(accountEdit)
-                .clickActionButton("Save")
-                .checkSaveSuccessMassage();
+    public void changeAccount() {
+        loginStep.login("tborodich@tms.sandbox", "Password001");
+        accountStep.edit(accountEdit,"Julia");
     }
 }

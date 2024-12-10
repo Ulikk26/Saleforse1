@@ -1,5 +1,6 @@
 package pages;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
@@ -17,9 +18,6 @@ import java.util.Objects;
 @Log4j2
 public abstract class BasePage {
 
-    //    private final By SUCCESS_MESSAGE = By.cssSelector("[data-aura-class=forceActionsText]");
-    private final By CREATE_SUCCESS_MESSAGE = By.xpath("//span[contains(@class, 'toastMessage') and contains(@class, 'forceActionsText') and contains(., 'was created')]");
-    private final By EDIT_SUCCESS_MESSAGE = By.xpath("//span[contains(@class, 'toastMessage') and contains(@class, 'forceActionsText') and contains(., 'was saved')]");
     WebDriver driver;
     WebDriverWait wait;
 
@@ -31,22 +29,6 @@ public abstract class BasePage {
     public abstract BasePage isPageOpened();
 
     public abstract BasePage open();
-
-    @Step("Проверка сообщения об успешном создании аккаунта")
-    public BasePage checkCreateSuccessMassage() {
-        log.info("Check success massage about creating account");
-        WebElement message = driver.findElement(CREATE_SUCCESS_MESSAGE);
-        Assert.assertTrue(message.isDisplayed(), "Сообщение об успешном создании аккаунта не отображается");
-        return this;
-    }
-
-    @Step("Проверка сообщения об успешном сохранении изменений  аккаунта")
-    public BasePage checkSaveSuccessMassage() {
-        log.info("Check success massage about editing account");
-        WebElement message = driver.findElement(EDIT_SUCCESS_MESSAGE);
-        Assert.assertTrue(message.isDisplayed(), "Сообщение об успешном редактировании аккаунта не отображается");
-        return this;
-    }
 
     // ждет загрузки всей страницы
     public void waitForPageLoaded() {

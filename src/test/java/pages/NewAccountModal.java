@@ -82,7 +82,7 @@ public class NewAccountModal extends BasePage {
     }
 
     @Step("Нажать на кнопку {buttonName} ")
-    public AccountsPage clickActionButton(String buttonName) {
+    public AccountsPage clickButton(String buttonName) {
         log.info("Clicking button '{}'", buttonName);
         By button = By.xpath(String.format(BUTTON, buttonName));
         driver.findElement(button).click();

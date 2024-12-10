@@ -11,6 +11,8 @@ import org.testng.annotations.*;
 import pages.AccountsPage;
 import pages.LoginPage;
 import pages.NewAccountModal;
+import steps.AccountStep;
+import steps.LoginStep;
 import utils.AllureUtils;
 
 import java.time.Duration;
@@ -22,6 +24,8 @@ public class BaseTest {
     NewAccountModal newAccountModal;
     LoginPage loginPage;
     AccountsPage accountsPage;
+    AccountStep accountStep;
+    LoginStep loginStep;
 
     @Parameters({"browser"})
     @BeforeMethod
@@ -41,6 +45,8 @@ public class BaseTest {
         newAccountModal = new NewAccountModal(driver);
         loginPage = new LoginPage(driver);
         accountsPage = new AccountsPage(driver);
+        accountStep =new AccountStep(driver);
+        loginStep =new LoginStep(driver);
     }
 
     @AfterMethod(alwaysRun = true)
