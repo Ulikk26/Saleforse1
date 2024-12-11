@@ -40,6 +40,7 @@ public class BaseTest {
             options.addArguments("--disable-gpu");
             options.addArguments("--disable-extensions");
             options.addArguments("--remote-allow-origins=*");
+            options.addArguments("--headless");
             driver = new ChromeDriver(options);
         } else if (browser.equalsIgnoreCase("fireFox")) {
             driver = new FirefoxDriver();
